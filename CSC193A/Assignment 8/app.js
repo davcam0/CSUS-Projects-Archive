@@ -28,10 +28,11 @@ app.get('/math/circle/:r', (req, res) => {
 
 // Exercise 2: Hello, you!
 
-app.get("/hello/:first?/:last?", function (req, res) {
+app.get("/hello/name", (req, res) => {
     res.type("text");
-    const firstName = req.params.first;
-    const lastName = req.params.last;
+
+    const firstName = req.query.first;
+    const lastName = req.query.last;
 
     let missingParams = [];
     if (!firstName) missingParams.push("first");
@@ -40,10 +41,9 @@ app.get("/hello/:first?/:last?", function (req, res) {
     if (missingParams.length > 0) {
         res.status(400).send(`Missing Required GET parameters: ${missingParams.join(", ")}`);
     } else {
-        res.send(`Hello, ${firstName} ${lastName}!`);
+        res.send(`Hello ${firstName} ${lastName}`);
     }
-  });
-  
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
